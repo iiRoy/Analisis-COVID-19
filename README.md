@@ -1,39 +1,544 @@
-# Descripción del Repositorio
-El análisis de las bases se hizo a través de un programa en R Studio, el cual nos permitió ver las características dentro de las bases de cada una de las variables del SARS COVID-19 disponibles en la base de datos de PubMed.
+<p align="center">
+  <img 
+    src="https://github.com/user-attachments/assets/085f1fbf-6b28-4405-b3bb-ee0a3ab7f384"
+    alt="Analisis COVID-19 Logo" 
+    width="700"
+  />
+</p>
 
-# Análisis Parte 1:
 
-## Situación Actual
-Durante el último mes, según el reporte de la OMS en relación al estado actual de nuestra sociedad con el virus, se reportaron aproximadamente 2.8 millones de casos nuevos, mientras que se registraron solamente 16,000 muertos a lo largo del globo. Estas cifras son alarmantes, ya que los índices de contagios se habían reducido en los últimos años, representando estos datos un riesgo para la salud pública global. Los contagios se reportaron mayormente en la parte sureste del continente Asiático.
+**Análisis COVID-19** is an academic bioinformatics project focused on the analysis of **SARS-CoV-2 variants** using genetic sequence data in FASTA format.
 
-Aunque las cifras han sido altas en otros continentes, el riesgo epidemiológico dentro de América se ha reducido de manera notable desde el último año, gracias a las condiciones donde se desarrollan las personas. Igualmente el riesgo de muerte se ha equilibrado durante el útlimo año gracias al avance tecnológico que se ha tenido, ya que aunque los casos de contagios son mayores, la tasa de muerte se ha reducido a más de la mitad desde el año pasado, donde aún se presentaba como un riesgo público.
+The project uses **R** and **R Markdown** to read viral genome sequences, calculate nucleotide composition, analyze GC content, compare SARS-CoV-2 variants, generate visualizations, and build a phylogenetic analysis workflow.
 
-Estos datos igualmente aplican para México, donde se enfrenta a diversos casos de contagios, buscando reducirlos lo más que se pueda. Mientras que la tasa de contagio está en constante crecimiento, la tasa de muertes se mantiene estable según los datos dados por el CONACYD.
+> [!NOTE]
+> This project was created for an academic computational biology analysis focused on SARS-CoV-2 variants.
 
-Dentro del estado de Puebla, se ha logrado controlar los estados de contagios por lo cual las medidas preventivas impuestas por el gobierno fueron removidas, y de igual manera se buscó dejar el uso del cubrebocas dentro de las actividades del día a día, aplicando la norma hacia todas las colonias y municipios de la ciudad, ya que por épocas de lluvia, se prioriza el evitar contagios de bacterias que puedan representar un riesgo sanitario por las inundaciones causadas por presas y ríos localizados alrededor del estado.
+---
 
-## Variantes del SARS-CoV-2
-Dentro del desarrollo del virus, han existido diversas variaciones del virus que han representado un riesgo para la humanidad. A continuación se enlistan las principales variantes del virus SARS-CoV-2 de manera cronológica:
+## Overview
 
-• Variante de Wuhan (China) - Diciembre de 2019, Wuhan, China: Es la variante original del virus SARS-CoV-2.
-• Variante BETA - Mayo de 2020, Sudáfrica: Presenta una mutación en la proteína S que puede hacerla más contagiosa y resistente a los anticuerpos, pero parece que las vacunas son efectivas contra ella.
-• Variante EPSILON - Julio de 2020, California, Estados Unidos: Aunque se necesitan más estudios, se ha sugerido que podría ser más contagiosa y resistente a las vacunas.
-• Variante ALPHA - Septiembre de 2020, Reino Unido: Se ha propagado a nivel mundial. Presenta una mutación en la proteína S que facilita su transmisión, pero parece responder a las vacunas.
-• Variante DELTA - Diciembre de 2020, India: Se cree que es altamente transmisible y que puede reducir la efectividad de algunas vacunas.
-• Variante MU - Enero de 2021, Colombia: Presenta mutaciones en la proteína S que podrían reducir la efectividad de las vacunas, pero todavía se necesita más investigación para entender su impacto.
-• Variante ETA - Abril de 2021, Europa: Su impacto y características son desconocidas.
-• Variante KAPPA - Abril de 2021, India: Se cree que puede ser más transmisible que la variante original, pero su impacto y características aún se están estudiando.
-• Variante ZETA - Abril de 2021, Brasil: Aunque se necesita más investigación, se cree que puede ser más transmisible que la variante original del virus.
-• Variante TAU - Agosto de 2021, Colombia: Presenta mutaciones en la proteína S que podrían afectar la eficacia de algunas vacunas, pero se necesita más investigación para entender su impacto.
-• Variante OMICRON - Noviembre de 2021, Sudáfrica: Presenta un gran número de mutaciones en la proteína S y se cree que es altamente transmisible. Se necesitan más estudios para comprender su impacto y características.
+This repository contains an R Markdown analysis of different SARS-CoV-2 variants using sequence data obtained in FASTA format.
 
-## Métodos de Investigación y Casos Hipotéticos
-Para la investigación del virus, usaría yo fuentes de confianza, como reportes emitidos por organizaciones gubernamentales o de carácter global, aunque por la corrupción y la apatía dentro de México, estos no son del todo certeros, y por lo tanto, no podemos tener estadísticas específicas acerca de cómo se desarrolla nuestro entorno. Igualmente me iría a reportes de investigación de carácter científico emitidos por reconocidos investigadores, para así poder saber acerca de las características de las variantes, así complementando mi investigación con las noticias locales, y mundiales para poder tener un contexto amplio alrededor de lo sucedido afuera.
+The analysis includes:
 
-Alrededor de las investigaciones del virus, al principio se trató de silenciar esta noticia, el cual fue descubierto por Li Wenliang, y fue silenciado por su propio gobierno. Si estuviera yo en su caso, conociendo las condiciones políticas y gubernamentales de China, trataría de recurrir a centros de investigación y universidades para requerir un apoyo, aunque lo trataría de hacer de manera global para así no tener censura del caso, permitiendo que otras personas puedan ayudar a solucionar este tipo de casos, evitando una catástrofe dentro de nuestra sociedad.
+- Reading SARS-CoV-2 variant sequences.
+- Calculating sequence length.
+- Calculating nucleotide percentages.
+- Calculating GC content.
+- Displaying the first and last nucleotides of each sequence.
+- Creating nucleotide percentage tables.
+- Generating comparative visualizations.
+- Aligning viral sequences.
+- Preparing phylogenetic analysis.
+- Documenting biological interpretation and conclusions.
 
-# Análisis Parte 2:
+> [!IMPORTANT]
+> This repository is intended for educational and academic analysis. It should not be used as a clinical, diagnostic, or public-health decision tool.
 
-## Programación para Software de Análisis de Bases
-Para el proyecto, se ha creado un programa para el análisis de las bases de cada una de las variantes, usando los datos obtenidos dentro de la Librería Nacional de Medicina (NCBI), importando los datos de cada una de estas de la sección de Genes, como archivos “fasta”. De esta manera, creamos funciones para poder contar el largo de las secuencias (lenght()), haciendo uso de las tablas incluidas en los archivos, y la lectura de los mismos para el análisis individual de los nucleótidos, y de igual forma la construcción de las estructuras con los primeros y últimos 20 nucleótidos usando las funciones de “head()” y “tail()”. Después de esto, se creó una tabla, conteniendo el porcentaje de los nucleótidos de cada variante, así permitiéndonos hacer un gráfico que nos determina el porcentaje en cada uno de los nucleótidos encontrados, así analizando los componentes de la estructura de cada uno para entender sus características que lo hacen diferente al resto, buscando entender estas estructuras para la creación de vacunas y anticuerpos para el ser humano. Dentro del mismo se incluye una explicación del gráfico.
+---
 
+## Project Structure
+
+```text
+Analisis-COVID-19/
+│
+├── ev02 [CODIGO] A01737437.rmd
+├── ev02 [VARIANTES_DATOS].zip
+├── ev02 [RESULTADOS_EJEMPLOS].zip
+├── README.md
+└── LICENSE
+```
+
+---
+
+## File Description
+
+| File | Description |
+|---|---|
+| `ev02 [CODIGO] A01737437.rmd` | Main R Markdown file containing the SARS-CoV-2 variant analysis code, functions, visualizations, explanations, and bibliography. |
+| `ev02 [VARIANTES_DATOS].zip` | ZIP file containing FASTA files for the SARS-CoV-2 variants analyzed in the project. |
+| `ev02 [RESULTADOS_EJEMPLOS].zip` | ZIP file containing example output images generated by the analysis. |
+| `README.md` | Project documentation. |
+| `LICENSE` | Project license. The repository includes a CC0 1.0 Universal license file. |
+
+---
+
+## Dataset
+
+The project analyzes FASTA files for the following SARS-CoV-2 variants:
+
+| Variant | FASTA File |
+|---|---|
+| Alpha | `alpha.fasta` |
+| Beta | `beta.fasta` |
+| Delta | `delta.fasta` |
+| Epsilon | `epsilon.fasta` |
+| Eta | `eta.fasta` |
+| Kappa | `kappa.fasta` |
+| Mu | `mu.fasta` |
+| Omicron | `omicron.fasta` |
+| Tau | `tau.fasta` |
+| Zeta | `zeta.fasta` |
+
+These files are stored inside:
+
+```text
+ev02 [VARIANTES_DATOS].zip
+```
+
+> [!IMPORTANT]
+> Before running the R Markdown file, extract the FASTA files from `ev02 [VARIANTES_DATOS].zip` and place them in the same working directory as the `.Rmd` file.
+
+---
+
+## Requirements
+
+To run this project, you need:
+
+- R
+- RStudio
+- R Markdown / Quarto-compatible rendering tools
+- The FASTA files extracted from `ev02 [VARIANTES_DATOS].zip`
+
+The project uses the following R libraries:
+
+| Library | Purpose |
+|---|---|
+| `stringr` | String handling and text utilities. |
+| `Biostrings` | Biological sequence manipulation. |
+| `seqinr` | Reading and working with FASTA sequences. |
+| `adegenet` | Genetic data analysis tools. |
+| `ape` | Phylogenetic and evolutionary analysis. |
+| `ggtree` | Phylogenetic tree visualization. |
+| `DECIPHER` | Sequence orientation and alignment. |
+| `viridis` | Color scales for visualizations. |
+| `ggplot2` | Data visualization. |
+| `dplyr` | Data manipulation. |
+| `purrr` | Functional programming utilities. |
+
+---
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/YOUR-USERNAME/Analisis-COVID-19.git
+```
+
+Open the project folder in RStudio.
+
+Install the required CRAN packages:
+
+```r
+install.packages(c(
+  "stringr",
+  "seqinr",
+  "adegenet",
+  "ape",
+  "viridis",
+  "ggplot2",
+  "dplyr",
+  "purrr"
+))
+```
+
+Install Bioconductor packages:
+
+```r
+install.packages("BiocManager")
+
+BiocManager::install(c(
+  "Biostrings",
+  "DECIPHER",
+  "ggtree"
+))
+```
+
+Extract the FASTA dataset:
+
+```text
+ev02 [VARIANTES_DATOS].zip
+```
+
+Place the extracted `.fasta` files in the same folder as:
+
+```text
+ev02 [CODIGO] A01737437.rmd
+```
+
+> [!TIP]
+> In RStudio, set the working directory to the project folder before knitting or running the analysis.
+
+---
+
+## How to Run
+
+1. Open RStudio.
+2. Open the project folder.
+3. Extract `ev02 [VARIANTES_DATOS].zip`.
+4. Open the file:
+
+```text
+ev02 [CODIGO] A01737437.rmd
+```
+
+5. Install all required packages.
+6. Run the chunks manually or knit the document.
+
+The R Markdown file is configured to support output formats such as:
+
+```text
+HTML
+Word
+PDF
+```
+
+> [!NOTE]
+> PDF output may require a LaTeX installation. If PDF rendering fails, use HTML output first.
+
+---
+
+## Main Analysis Workflow
+
+The analysis follows this general structure:
+
+1. Load required R libraries.
+2. Read FASTA files for each SARS-CoV-2 variant.
+3. Store each variant sequence in an individual object.
+4. Calculate sequence length.
+5. Calculate nucleotide percentages.
+6. Calculate GC content.
+7. Display the first and last 20 nucleotides.
+8. Build a nucleotide-percentage comparison table.
+9. Generate a bar plot of nucleotide composition.
+10. Retrieve additional GenBank sequences.
+11. Align sequences.
+12. Generate similarity and phylogenetic analysis outputs.
+13. Print biological explanations and conclusions.
+14. Print bibliography and package citations.
+
+---
+
+## Functions Included
+
+The R Markdown file defines several functions to organize the analysis.
+
+| Function | Description |
+|---|---|
+| `get_length()` | Prints the length of a sequence. |
+| `tablas()` | Calculates nucleotide percentage tables. |
+| `percentage()` | Prints nucleotide percentages for a sequence. |
+| `porcentajeGC()` | Calculates and prints GC content. |
+| `contrasentido()` | Displays the first and last 20 nucleotides of a sequence. |
+| `DatosAlumno()` | Prints project, course, and author information. |
+| `DataGraph()` | Retrieves GenBank sequences and prepares sequence alignment. |
+| `VirusData()` | Runs sequence analysis for each SARS-CoV-2 variant. |
+| `VirusGraph()` | Creates a nucleotide percentage comparison table and bar plot. |
+| `VirusGraph2()` | Creates similarity and phylogenetic analysis visualizations. |
+| `Explicaciones()` | Prints explanations for the generated charts and tables. |
+| `Citas()` | Prints bibliography and R package citations. |
+| `final()` | Runs the full analysis workflow. |
+
+> [!WARNING]
+> If you modify the dataset or file names, update the file paths inside the `.Rmd` file before running the analysis.
+
+---
+
+## Variants Analyzed
+
+The project analyzes the following variants:
+
+- Alpha
+- Beta
+- Delta
+- Epsilon
+- Eta
+- Kappa
+- Mu
+- Omicron
+- Tau
+- Zeta
+
+Each variant is read from its corresponding FASTA file.
+
+Example:
+
+```r
+ALPHA <- read.fasta("alpha.fasta")
+A_seq <- ALPHA[[1]]
+```
+
+---
+
+## Analysis Outputs
+
+The project can generate:
+
+- Sequence-length summaries.
+- Nucleotide percentage tables.
+- GC-content values.
+- First and last nucleotide comparisons.
+- Nucleotide composition bar charts.
+- Sequence alignment files.
+- Similarity tables.
+- Phylogenetic tree visualizations.
+- Written explanations and conclusions.
+
+Example output files are included in:
+
+```text
+ev02 [RESULTADOS_EJEMPLOS].zip
+```
+
+---
+
+## Example Results Section
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/908afa9a-0112-4d50-b14e-db7b31cee063" alt="COVID-19 Analysis Result 1" width="700" />
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/187a3a26-642e-4953-a650-ef128fcf4b5f" alt="COVID-19 Analysis Result 2" width="700" />
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/c5102e65-52b3-4280-9867-2be8d4495c6a" alt="COVID-19 Analysis Result 3" width="700" />
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/d261ae0c-da99-406f-a4f5-2b9fe9638736" alt="COVID-19 Analysis Result 3" width="700" />
+</p>
+
+---
+
+## Nucleotide Composition Analysis
+
+One of the main parts of the project is the comparison of nucleotide percentages between SARS-CoV-2 variants.
+
+The analysis compares the percentage of:
+
+| Base | Meaning |
+|---|---|
+| `A` | Adenine |
+| `C` | Cytosine |
+| `G` | Guanine |
+| `T` | Thymine |
+| `N` | Unknown or undefined nucleotide |
+
+The project uses these percentages to create a comparative table and bar plot.
+
+> [!NOTE]
+> In sequence datasets, `N` usually represents an unknown or unresolved nucleotide position.
+
+---
+
+## GC Content
+
+The project calculates the GC content of each sequence.
+
+GC content refers to the percentage of nucleotides in a DNA or RNA sequence that are either:
+
+- `G`, Guanine
+- `C`, Cytosine
+
+GC content is useful because it can help describe sequence structure, stability, and differences between variants.
+
+---
+
+## Sequence Alignment and Phylogenetic Analysis
+
+The project also includes a workflow for sequence alignment and phylogenetic comparison.
+
+The analysis uses GenBank sequence IDs, aligns selected sequences, calculates distance or similarity values, and prepares a phylogenetic tree visualization.
+
+> [!WARNING]
+> Phylogenetic interpretation depends heavily on sequence quality, alignment method, sampling strategy, and biological context. Results should be treated as academic analysis, not definitive epidemiological evidence.
+
+---
+
+## Academic Context
+
+This project was created for:
+
+```text
+Course: Análisis de Biología Computacional
+Situation Problem: Virus SARS-CoV-2: un análisis profundo
+Campus: Puebla
+```
+
+Author:
+
+```text
+Rodrigo López Guerra
+A01737437
+```
+
+---
+
+## Bibliography and References
+
+The R Markdown file includes bibliography references related to:
+
+- The origins of SARS-CoV-2.
+- Characteristics of SARS-CoV-2 and COVID-19.
+- Coronavirus biology and replication.
+- R package citations.
+
+The project also references sequence data and documentation from NCBI / GenBank.
+
+> [!NOTE]
+> When using this project for academic work, keep the bibliography and package citations generated by the `Citas()` function.
+
+---
+
+## Troubleshooting
+
+### FASTA files are not found
+
+Make sure the files from:
+
+```text
+ev02 [VARIANTES_DATOS].zip
+```
+
+are extracted and placed in the same folder as the R Markdown file.
+
+Required files:
+
+```text
+alpha.fasta
+beta.fasta
+delta.fasta
+epsilon.fasta
+eta.fasta
+kappa.fasta
+mu.fasta
+omicron.fasta
+tau.fasta
+zeta.fasta
+```
+
+---
+
+### A package is missing
+
+Install the missing package using either:
+
+```r
+install.packages("package_name")
+```
+
+or, for Bioconductor packages:
+
+```r
+BiocManager::install("package_name")
+```
+
+---
+
+### `ggtree` does not install correctly
+
+Make sure Bioconductor is installed and updated:
+
+```r
+install.packages("BiocManager")
+BiocManager::install("ggtree")
+```
+
+> [!TIP]
+> If `ggtree` fails, restart RStudio and try installing it again through Bioconductor.
+
+---
+
+### PDF output does not render
+
+If PDF rendering fails, use HTML output first.
+
+PDF rendering may require a LaTeX distribution such as TinyTeX.
+
+```r
+install.packages("tinytex")
+tinytex::install_tinytex()
+```
+
+---
+
+### GenBank data cannot be downloaded
+
+The function that retrieves GenBank data requires an internet connection.
+
+Check that:
+
+- You are connected to the internet.
+- NCBI services are reachable.
+- The sequence IDs are still available.
+- Your R session has permission to access external resources.
+
+---
+
+### R Markdown does not knit completely
+
+Run the document chunk by chunk to identify the failing section.
+
+Common causes include:
+
+- Missing FASTA files.
+- Missing packages.
+- Internet issues when retrieving GenBank data.
+- File paths not matching the working directory.
+- Variables being used before they are created.
+
+> [!WARNING]
+> If you edit the R Markdown file, make sure object names remain consistent across functions.
+
+---
+
+## Possible Improvements
+
+Future versions could include:
+
+- Cleaner folder organization for datasets and outputs.
+- A dedicated `data/` folder for FASTA files.
+- A dedicated `results/` folder for generated images.
+- More structured data tables.
+- Better error handling for missing files.
+- Automatic extraction of ZIP datasets.
+- Parameterized R Markdown execution.
+- More detailed phylogenetic interpretation.
+- Updated variant list.
+- More metadata for each FASTA sequence.
+- Interactive visualizations.
+- Exported CSV summary tables.
+- A reproducible `renv` environment.
+- A cleaner separation between code, analysis, and written explanations.
+
+---
+
+## License
+
+This repository includes a **CC0 1.0 Universal** license.
+
+This means the project is released as openly as possible under the terms of the included license file.
+
+> [!IMPORTANT]
+> Even when the repository uses CC0, external biological sequence databases, package citations, and academic references should still be credited properly.
+
+---
+
+## Disclaimer
+
+This project is for educational and academic purposes only.
+
+It is not intended for:
+
+- Medical diagnosis.
+- Clinical decision-making.
+- Public health policy.
+- Epidemiological forecasting.
+- Professional genomic surveillance.
+
+> [!CAUTION]
+> Always consult official scientific, medical, and public-health sources for real-world COVID-19 information and decisions.
